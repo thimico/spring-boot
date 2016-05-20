@@ -8,13 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -28,6 +24,8 @@ import lombok.Setter;
 import br.com.w6.sb.perfil.Perfil;
 import br.com.w6.sb.utils.AbstractEntity;
 import br.com.w6.sb.utils.enums.EStatus;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @AllArgsConstructor
 @Builder
@@ -77,7 +75,8 @@ public class Usuario extends AbstractEntity<Long>{
 	//	private String stUsuario;
 	private EStatus stUsuario;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
+	@JsonManagedReference
+	@ManyToMany(fetch= FetchType.EAGER)
 	@JoinTable(name = "segcartorio.sc_usuario_perfil", joinColumns = @JoinColumn(name = "fk_id_usuario"), inverseJoinColumns = @JoinColumn(name = "fk_id_perfil") )
 	private List<Perfil> perfis;
 

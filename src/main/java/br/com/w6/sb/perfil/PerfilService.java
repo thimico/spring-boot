@@ -11,6 +11,6 @@ import br.com.w6.sb.utils.ServicePath;
 public class PerfilService extends AbstractService<Perfil, Long> {
 
 
-
+	
 
 }

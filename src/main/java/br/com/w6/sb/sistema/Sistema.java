@@ -5,11 +5,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,6 +18,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import br.com.w6.sb.perfil.Perfil;
 import br.com.w6.sb.utils.AbstractEntity;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @AllArgsConstructor
 @Builder
@@ -53,8 +53,9 @@ public class Sistema extends AbstractEntity<Long> {
 	@Column(name="tx_url", nullable=false, length=256)
 	private String txUrl;
 
+	@JsonManagedReference
 	//bi-directional many-to-one association to Perfil
-	@OneToMany(mappedBy="sistema")
+	@OneToMany(mappedBy="sistema",fetch= FetchType.EAGER)
 	private List<Perfil> perfis;
 
 }

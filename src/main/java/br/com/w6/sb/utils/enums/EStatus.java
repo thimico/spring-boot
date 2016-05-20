@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public enum EStatus {
 	A("Ativo", "Sim"),
-	I("Inativo", "Não");
+	I("Inativo", "NÃ£o");
 
 	private String nomeStatus;
 

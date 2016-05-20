@@ -5,14 +5,10 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -23,6 +19,9 @@ import lombok.Setter;
 import br.com.w6.sb.sistema.Sistema;
 import br.com.w6.sb.usuaio.Usuario;
 import br.com.w6.sb.utils.AbstractEntity;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @AllArgsConstructor
 @Builder
@@ -40,10 +39,13 @@ public class Perfil extends AbstractEntity<Long> {
 
 	@Column(name="nm_perfil", nullable=false, length=20)
 	private String nmPerfil;
-	
-	@ManyToMany(mappedBy = "perfis")
+	   
+	@JsonBackReference
+	@ManyToMany(mappedBy = "perfis", fetch= FetchType.EAGER)
 	private List<Usuario> usuarios;
-	
+	 
+
+	@JsonBackReference
 	@ManyToOne(fetch= FetchType.EAGER)
 	@JoinColumn(name="fk_id_sistema", nullable=false)
 	private Sistema sistema;

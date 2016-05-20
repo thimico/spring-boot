@@ -53,7 +53,7 @@ public abstract class AbstractService <T extends AbstractEntity<ID>, ID extends 
 	public void delete(@RequestBody T entityObject) {
 		this.LOGGER.debug(String.format("Request to delete the record [%s].", entityObject));
 
-		this.genericRepository.delete(entityObject);
+		this.genericRepository.delete(entityObject.getId());
 	}
 
 }
