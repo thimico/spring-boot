@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.BatchSize;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -39,16 +41,9 @@ public class Perfil extends AbstractEntity<Long> {
 
 	@Column(name="nm_perfil", nullable=false, length=20)
 	private String nmPerfil;
-	   
-	@JsonBackReference
-	@ManyToMany(mappedBy = "perfis", fetch= FetchType.EAGER)
-	private List<Usuario> usuarios;
-	 
 
-	@JsonBackReference
-	@ManyToOne(fetch= FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name="fk_id_sistema", nullable=false)
 	private Sistema sistema;
 
-	
 }

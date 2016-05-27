@@ -19,6 +19,7 @@ import lombok.Setter;
 import br.com.w6.sb.perfil.Perfil;
 import br.com.w6.sb.utils.AbstractEntity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -52,8 +53,8 @@ public class Sistema extends AbstractEntity<Long> {
 
 	@Column(name="tx_url", nullable=false, length=256)
 	private String txUrl;
-
-	@JsonManagedReference
+ 
+	@JsonIgnore
 	//bi-directional many-to-one association to Perfil
 	@OneToMany(mappedBy="sistema",fetch= FetchType.EAGER)
 	private List<Perfil> perfis;

@@ -21,11 +21,12 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 import br.com.w6.sb.perfil.Perfil;
 import br.com.w6.sb.utils.AbstractEntity;
 import br.com.w6.sb.utils.enums.EStatus;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @AllArgsConstructor
 @Builder
@@ -75,7 +76,6 @@ public class Usuario extends AbstractEntity<Long>{
 	//	private String stUsuario;
 	private EStatus stUsuario;
 	
-	@JsonManagedReference
 	@ManyToMany(fetch= FetchType.EAGER)
 	@JoinTable(name = "segcartorio.sc_usuario_perfil", joinColumns = @JoinColumn(name = "fk_id_usuario"), inverseJoinColumns = @JoinColumn(name = "fk_id_perfil") )
 	private List<Perfil> perfis;

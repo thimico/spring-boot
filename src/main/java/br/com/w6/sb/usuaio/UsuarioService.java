@@ -9,8 +9,7 @@ import br.com.w6.sb.utils.ServicePath;
 @RestController
 @RequestMapping(path = ServicePath.USER_PATH)
 public class UsuarioService extends AbstractService<Usuario, Long> {
-
-
+	
 
 
 }
