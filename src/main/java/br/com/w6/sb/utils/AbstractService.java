@@ -13,16 +13,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import br.com.w6.sb.usuaio.Usuario;
+import br.com.w6.sb.usuario.Usuario;
 
-public abstract class AbstractService <T extends AbstractEntity<Long>, Long extends Serializable> implements ServiceMap {
+public abstract class AbstractService <T extends AbstractEntity<ID>, ID extends Serializable> implements ServiceMap {
 	private final Logger LOGGER = Logger.getLogger(this.getClass());
 
 	@Autowired
-	protected JpaRepository<T, Long> genericRepository;
+	protected JpaRepository<T, ID> genericRepository;
 
 	@RequestMapping(value="/{id}", method = RequestMethod.GET)
-	public T detalhar(@PathVariable("id") Long id) {
+	public T detalhar(@PathVariable("id") ID id) {
 		this.LOGGER.debug(String.format("Requesting record id: [%s].", id));
 
 		return this.genericRepository.findOne(id);
@@ -70,7 +70,7 @@ public abstract class AbstractService <T extends AbstractEntity<Long>, Long exte
 	}
 	
 	@RequestMapping(value="/{id}",method = RequestMethod.DELETE)
-	public void delete(@PathVariable("id") Long id) {
+	public void delete(@PathVariable("id") ID id) {
 		this.LOGGER.debug(String.format("Request to delete the record [%s].", id));
 
 		this.genericRepository.delete(id);

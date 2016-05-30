@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Getter
 @Setter
-public abstract class AbstractEntity<Long extends Serializable> extends AbstractPersistable<Long> implements Cloneable{
+public abstract class AbstractEntity<ID extends Serializable> extends AbstractPersistable<ID> {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -34,7 +34,7 @@ public abstract class AbstractEntity<Long extends Serializable> extends Abstract
 	}
 
 	@Override
-	public void setId(Long id) {
+	public void setId(ID id) {
 		super.setId(id);
 	}
 

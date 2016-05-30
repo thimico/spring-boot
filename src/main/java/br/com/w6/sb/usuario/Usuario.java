@@ -1,16 +1,20 @@
-package br.com.w6.sb.usuaio;
+package br.com.w6.sb.usuario;
 
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,9 +25,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import org.hibernate.validator.constraints.NotEmpty;
-
 import br.com.w6.sb.perfil.Perfil;
 import br.com.w6.sb.utils.AbstractEntity;
 import br.com.w6.sb.utils.enums.EStatus;
@@ -34,11 +35,25 @@ import br.com.w6.sb.utils.enums.EStatus;
 @Getter
 @Setter
 @Entity
-@Table(name = "sc_usuario", schema = "segcartorio")
+@Table(name = "sc_usuario")
+@AttributeOverride(name = "id", column = @Column(name = "id_usuario"))
 public class Usuario extends AbstractEntity<Long>{
 
 	private static final long serialVersionUID = 1L;
-
+	
+	@SequenceGenerator(name = "SC_USUARIO_ID_GENERATOR", sequenceName = "SEQ_ID_USUARIO", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SC_USUARIO_ID_GENERATOR")
+	@Override
+	public Long getId() {
+		// TODO Auto-generated method stub
+		return super.getId();
+	}
+	
+	@Override
+	public void setId(Long id) {
+		// TODO Auto-generated method stub
+		super.setId(id);
+	}
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "dt_nascimento", nullable = false)
@@ -52,7 +67,7 @@ public class Usuario extends AbstractEntity<Long>{
 	@Column(name = "bt_foto")
 	private byte[] nmFoto;
 
-	@Column(name = "nm_login", nullable = false, length = 20)
+	@Column(name = "nm_login", nullable = false, length = 20, unique = true)
 	private String nmLogin;
 
 	@Column(name = "nm_senha", nullable = false, length = 50)
@@ -76,10 +91,8 @@ public class Usuario extends AbstractEntity<Long>{
 	//	private String stUsuario;
 	private EStatus stUsuario;
 	
-	@ManyToMany(fetch= FetchType.EAGER)
-	@JoinTable(name = "segcartorio.sc_usuario_perfil", joinColumns = @JoinColumn(name = "fk_id_usuario"), inverseJoinColumns = @JoinColumn(name = "fk_id_perfil") )
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "sc_usuario_perfil", joinColumns = @JoinColumn(name = "fk_id_usuario"), inverseJoinColumns = @JoinColumn(name = "fk_id_perfil") )
 	private List<Perfil> perfis;
-
-
 	
 }

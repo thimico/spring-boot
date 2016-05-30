@@ -3,10 +3,14 @@ package br.com.w6.sb.sistema;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -29,11 +33,25 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Getter
 @Setter
 @Entity
-@Table(name="sc_sistema", schema="segcartorio")
+@Table(name="sc_sistema")
+@AttributeOverride(name = "id", column = @Column(name = "id_sistema"))
 public class Sistema extends AbstractEntity<Long> { 
 
 	private static final long serialVersionUID = 1L;
 
+	@SequenceGenerator(name = "SC_SISTEMA_ID_GENERATOR", sequenceName = "seq_id_sistema", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SC_SISTEMA_ID_GENERATOR")
+	@Override
+	public Long getId() {
+		// TODO Auto-generated method stub
+		return super.getId();
+	}
+	
+	@Override
+	public void setId(Long id) {
+		// TODO Auto-generated method stub
+		super.setId(id);
+	}
 
 	@Column(name="ds_sistema", nullable=false, length=100)
 	private String dsSistema;

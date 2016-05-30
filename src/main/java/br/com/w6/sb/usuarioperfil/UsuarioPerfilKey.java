@@ -2,6 +2,7 @@ package br.com.w6.sb.usuarioperfil;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.Table;
 
 import br.com.w6.sb.utils.AbstractKey;
 

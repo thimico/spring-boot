@@ -1,4 +1,4 @@
-package br.com.w6.sb.usuaio;
+package br.com.w6.sb.usuario;
 
 import java.util.List;
 

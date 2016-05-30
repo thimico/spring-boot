@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.w6.sb.usuaio.Usuario;
-import br.com.w6.sb.usuaio.UsuarioRepository;
+import br.com.w6.sb.usuario.Usuario;
+import br.com.w6.sb.usuario.UsuarioRepository;
 import br.com.w6.sb.utils.ServiceMap;
 import br.com.w6.sb.utils.ServicePath;
 
